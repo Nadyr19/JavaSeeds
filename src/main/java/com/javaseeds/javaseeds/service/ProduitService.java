@@ -21,4 +21,7 @@ public interface ProduitService {
     List<Produit> findByPrixRange(BigDecimal min, BigDecimal max);
     boolean existsByNom(String nom);
     long count();
+
+    //Récupérer liste produits par catégorie
+    List<Produit> findByCategorie(String categorie);
 }

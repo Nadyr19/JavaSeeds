@@ -20,6 +20,8 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     List<Produit> findByQuantiteLessThan(Integer seuil);
     Optional<Produit> findByNom(String nom);
     boolean existsByNom(String nom);
+
+    List<Produit> findByCategorie(String categorie);
     
     // Requêtes JPQL
     @Query("SELECT p FROM Produit p WHERE p.prix > :prixMin ORDER BY p.prix ASC")

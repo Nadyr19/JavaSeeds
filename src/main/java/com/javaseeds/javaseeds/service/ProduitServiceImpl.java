@@ -44,6 +44,7 @@ public class ProduitServiceImpl implements ProduitService {
         }
         
         Produit produit = new Produit();
+        produit.setCategorie(produitDTO.getCategorie());
         produit.setNom(produitDTO.getNom());
         produit.setDescription(produitDTO.getDescription());
         produit.setPrix(produitDTO.getPrix());
@@ -51,7 +52,7 @@ public class ProduitServiceImpl implements ProduitService {
         
         return produitRepository.save(produit);
     }
-@Override
+    @Override
     public Produit update(Long id, ProduitDTO produitDTO) {
         logger.info("Mise à jour du produit avec l'id: {}", id);
         
@@ -64,6 +65,7 @@ public class ProduitServiceImpl implements ProduitService {
             throw new ResourceAlreadyExistsException("Un produit avec le nom '" + produitDTO.getNom() + "' existe déjà");
         }
         
+        produit.setCategorie(produitDTO.getCategorie());
         produit.setNom(produitDTO.getNom());
         produit.setDescription(produitDTO.getDescription());
         produit.setPrix(produitDTO.getPrix());
@@ -72,6 +74,7 @@ public class ProduitServiceImpl implements ProduitService {
         return produitRepository.save(produit);
     }
     
+
 @Override
     @Transactional(readOnly = true)
     public Optional<Produit> findById(Long id) {
@@ -115,7 +118,17 @@ public class ProduitServiceImpl implements ProduitService {
         logger.debug("Recherche de produits par plage de prix: {} - {}", min, max);
         return produitRepository.findByPrixBetween(min, max);
     }
-@Override
+
+
+    //Récupérer liste produits par catégorie
+    @Override
+    @Transactional(readOnly = true)
+    public List<Produit> findByCategorie(String categorie) {
+        logger.debug("Recherche des produits par catégorie : {}", categorie);
+        return produitRepository.findByCategorie(categorie);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public boolean existsByNom(String nom) {
         return produitRepository.existsByNom(nom);

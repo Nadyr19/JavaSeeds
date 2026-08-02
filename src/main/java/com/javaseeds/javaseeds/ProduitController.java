@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/produits")
 public class ProduitController {
@@ -32,6 +33,30 @@ public class ProduitController {
         Produit savedProduit = produitService.save(produitDTO);
         return new ResponseEntity<>(savedProduit, HttpStatus.CREATED);
     }
+
+    //Récupérer liste produits par catégorie
+
+    //1) paramètre de requête (recommandé)
+
+    @GetMapping("/categorie")
+    public ResponseEntity<List<Produit>> getByCategorie(@RequestParam String categorie) {
+        List<Produit> produits = produitService.findByCategorie(categorie);
+        if (produits.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 si vide
+        }
+        return ResponseEntity.ok(produits);
+    }
+
+    //Chemin dynamique (Restful)
+    /* @GetMapping("/categorie/{categorie}")
+    public ResponseEntity<List<Produit>> getByCategorie(@PathVariable String categorie) {
+        List<Produit> produits = produitService.findByCategorie(categorie);
+        if (produits.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(produits);
+    }
+     */
     
     @GetMapping("/{id}")
     public ResponseEntity<Produit> getById(@PathVariable Long id) {
@@ -44,7 +69,8 @@ public class ProduitController {
     public ResponseEntity<List<Produit>> getAll() {
         return ResponseEntity.ok(produitService.findAll());
     }
-@GetMapping("/pagine")
+    
+    @GetMapping("/pagine")
     public ResponseEntity<Page<Produit>> getAllPagine(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
