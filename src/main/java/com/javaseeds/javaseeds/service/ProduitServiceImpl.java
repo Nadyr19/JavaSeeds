@@ -7,7 +7,6 @@ import com.javaseeds.javaseeds.entity.Produit;
 import com.javaseeds.javaseeds.exception.ResourceAlreadyExistsException;
 import com.javaseeds.javaseeds.exception.ResourceNotFoundException;
 import com.javaseeds.javaseeds.repository.ProduitRepository;
-import com.javaseeds.javaseeds.service.ProduitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

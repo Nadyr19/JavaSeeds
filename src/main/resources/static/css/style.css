@@ -15,7 +15,7 @@
 
 body {
     background-color: var(--creme);
-    font-family: "Montserrat", sans-serif ;
+    font-family: "Montserrat", sans-serif;
 }
 
 header {
@@ -24,7 +24,7 @@ header {
     font-size: 24px;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,7 +99,7 @@ h1 {
     color: var(--texte-fonce);
     font-size: 32px;
     padding: 8px;
-    margin-bottom:  30px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -112,7 +112,8 @@ h2 {
     font-size: 24px;
     margin-bottom: 30px;
 }
-.hero  {
+
+.hero {
     background-color: black;
     margin: 30px;
     padding: 20px;
@@ -124,42 +125,49 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
 }
 
-.cards-prod {
-    min-width: 1200px;
-    height: 500px;
-    margin: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 20px;
 }
 
-.card {
+.grid-cards div {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 300px;
+    height: 100%;
     color: var(--texte-clair);
     border: 1px black solid;
     background-color: var(--fonce);
     padding: 20px 10px;
     border-radius: 20px;
     box-shadow: 10px 10px 12px black;
-    
+
 }
-.card img {
-    width: 250px;
+
+.grid-cards img {
+    width: 90%;
     height: 250px;
     object-fit: cover;
+    object-position: center;
+    border-radius: 8px 8px 0 0;
 
 }
 
 .card h2 {
     color: var(--texte-clair)
+}
+
+.card p {
+    margin: 20px;
+    font-size: larger;
 }
 
 .carre1 {

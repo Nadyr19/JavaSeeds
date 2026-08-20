@@ -1,4 +1,4 @@
-package com.javaseeds.javaseeds;
+package com.javaseeds.javaseeds.controller;
 
 
 import com.javaseeds.javaseeds.dto.ProduitDTO;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://127.0.0.1:5501")
 @RestController
 @RequestMapping("/api/produits")
 public class ProduitController {
@@ -47,7 +47,7 @@ public class ProduitController {
         return ResponseEntity.ok(produits);
     }
 
-    //Chemin dynamique (Restful)
+    //2) Chemin dynamique (Restful)
     /* @GetMapping("/categorie/{categorie}")
     public ResponseEntity<List<Produit>> getByCategorie(@PathVariable String categorie) {
         List<Produit> produits = produitService.findByCategorie(categorie);
@@ -69,6 +69,8 @@ public class ProduitController {
     public ResponseEntity<List<Produit>> getAll() {
         return ResponseEntity.ok(produitService.findAll());
     }
+
+
     
     @GetMapping("/pagine")
     public ResponseEntity<Page<Produit>> getAllPagine(

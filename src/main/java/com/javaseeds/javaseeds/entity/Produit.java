@@ -50,6 +50,9 @@ public class Produit {
     @Column(nullable = false, length = 100)
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;  
+
     @Column(name = "date_creation", nullable = false, updatable = false)
     private LocalDateTime dateCreation;
     
@@ -64,12 +67,14 @@ public class Produit {
             @NotBlank(message = "Le nom est obligatoire") @Size(min = 2, max = 100, message = "Le nom doit contenir entre 2 et 100 caratères") String nom,
             @NotNull(message = "Le prix est obligatoire") @Positive(message = "Le prix doit être positif") BigDecimal prix,
             @NotNull(message = "La quantité est obligatoire") @Min(value = 0, message = "La quantité ne peut être négative") Integer quantite,
-            @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères") String description) {
+            @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères") String description, 
+            String imageUrl) {
         this.categorie = categorie;
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;
         this.description = description;
+        this.imageUrl =  imageUrl;
     }
 
     public Long getId() {
@@ -120,6 +125,7 @@ public class Produit {
         this.description = description;
     }
 
+
     public LocalDateTime getDateCreation() {
         return dateCreation;
     }
@@ -146,6 +152,36 @@ public class Produit {
     @PreUpdate
     protected void onUpdate() {
         dateModification = LocalDateTime.now();
+    }
+/* 
+    public String getImageUrl() {
+        return imageUrl;
+    } */
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    // Méthode utilitaire pour obtenir l'URL complète de l'image
+    // Modifier data.sql avec les noms de fichiers uniquement
+    public String getImageUrl() {
+        if (imageUrl == null) {
+            return null;
+        }
+        // Return absolute URLs unchanged
+        if (imageUrl.startsWith("http")) {
+            return imageUrl;
+        }
+        // Strip any leading API/static prefixes to avoid duplicates
+        String cleaned = imageUrl;
+        if (cleaned.startsWith("/api/images/")) {
+            cleaned = cleaned.substring("/api/images/".length());
+        }
+        if (cleaned.startsWith("/images/")) {
+            cleaned = cleaned.substring("/images/".length());
+        }
+        // Ensure a single API image prefix
+        return "/api/images/" + cleaned;
     }
     
 }

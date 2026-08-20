@@ -29,6 +29,9 @@ public class ProduitDTO {
     @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères")
     private String description;
 
+    // ✅ AJOUTEZ CE CHAMP
+    private String imageUrl;
+
     public ProduitDTO() {
     }
 
@@ -37,12 +40,14 @@ public class ProduitDTO {
             @NotBlank(message = "Le nom est obligatoire") @Size(min = 2, max = 100, message = "Le nom doit contenir entre 2 et 100 caratères") String nom,
             @NotNull(message = "Le prix est obligatoire") @Positive(message = "Le prix doit être positif") BigDecimal prix,
             @NotNull(message = "La quantité est obligatoire") @Min(value = 0, message = "La quantité ne peut être négative") Integer quantite,
-            @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères") String description) {
+            @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères") String description,
+            String imageUrl) {  // ✅ AJOUTEZ CE PARAMÈTRE
         this.categorie = categorie;
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;
         this.description = description;
+        this.imageUrl = imageUrl;  // ✅ AJOUTEZ CETTE LIGNE
     }
 
     public String getCategorie() {
@@ -85,5 +90,12 @@ public class ProduitDTO {
         this.description = description;
     }
 
-    
+    // ✅ AJOUTEZ CES GETTERS ET SETTERS
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
